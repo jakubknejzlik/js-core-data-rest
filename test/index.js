@@ -115,12 +115,12 @@ describe("rest", () => {
 
   describe("delete", () => {
     it("should delete company", () => {
-      return test.delete(`/companies/1`).expect(201).then(() => {
+      return test.delete(`/companies/1`).expect(204).then(() => {
         return test.get("/companies/1").expect(404);
       });
     });
     it("should delete person", () => {
-      return test.delete(`/people/1`).expect(201).then(() => {
+      return test.delete(`/people/1`).expect(204).then(() => {
         return test.get("/people/1").expect(404);
       });
     });
