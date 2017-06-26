@@ -78,7 +78,7 @@ describe("rest", () => {
   describe("post", () => {
     it("should create company", () => {
       return test
-        .post(`/companies/1`)
+        .post(`/companies`)
         .send({ name: "foo", employees_id: [1, 3] })
         .expect(201)
         .then(res => {
