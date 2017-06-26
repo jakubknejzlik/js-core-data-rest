@@ -75,6 +75,19 @@ describe("rest", () => {
     });
   });
 
+  describe("post", () => {
+    it("should create company", () => {
+      return test
+        .post(`/companies/1`)
+        .send({ name: "foo", employees_id: [1, 3] })
+        .expect(201)
+        .then(res => {
+          assert.equal(res.body.name, "foo");
+          assert.deepEqual(res.body.employees_id, [1, 3]);
+        });
+    });
+  });
+
   describe("patch", () => {
     it("should patch company detail", () => {
       const employees = [1, 2, 3];
