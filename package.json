@@ -1,7 +1,7 @@
 {
   "name": "js-core-data-rest",
   "description": "Rest endpoint generator for js-core-data",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
   "keywords": [
     "js-core-data",
