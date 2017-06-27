@@ -111,6 +111,17 @@ describe("rest", () => {
           assert.deepEqual(res.body.company_id, 1);
         });
     });
+
+    it("should patch person detail with null value", () => {
+      return test
+        .patch(`/people/1`)
+        .send({ firstname: "big boss", company_id: null })
+        .expect(200)
+        .then(res => {
+          assert.equal(res.body.firstname, "big boss");
+          assert.deepEqual(res.body.company_id, null);
+        });
+    });
   });
 
   describe("delete", () => {
