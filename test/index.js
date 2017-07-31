@@ -47,6 +47,26 @@ describe("rest", () => {
         assert.equal(res.body.length, 1);
       });
     });
+    it("should get companies sorted by id", () => {
+      return test.get(`/companies?order=id`).expect(206).then(res => {
+        assert.equal(res.body[0].id, 1);
+        assert.equal(res.body[1].id, 2);
+        assert.equal(res.body[2].id, 3);
+      });
+    });
+    it("should get companies sorted by id DESC", () => {
+      return test.get(`/companies?order=-id`).expect(206).then(res => {
+        assert.equal(res.body[0].id, 3);
+        assert.equal(res.body[1].id, 2);
+        assert.equal(res.body[2].id, 1);
+      });
+    });
+    it("should get companies sorted by name", () => {
+      return test.get(`/companies?order=name`).expect(206).then(res => {
+        assert.equal(res.body[0].name, "test");
+        assert.equal(res.body[1].name, "test2");
+      });
+    });
     it("should get companies", () => {
       return test.get(`/companies`).expect(206).then(res => {
         assert.equal(res.body.length, 3);
