@@ -121,6 +121,18 @@ describe("rest", () => {
         });
     });
 
+    it("should patch company detail with empty employees", () => {
+      const employees = [];
+      return test
+        .patch(`/companies/1`)
+        .send({ name: "blah", employees_id: employees })
+        .expect(200)
+        .then(res => {
+          assert.equal(res.body.name, "blah");
+          assert.deepEqual(res.body.employees_id, employees);
+        });
+    });
+
     it("should patch person detail", () => {
       return test
         .patch(`/people/1`)
