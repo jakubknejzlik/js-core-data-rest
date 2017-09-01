@@ -88,12 +88,30 @@ describe("rest", () => {
           });
       });
 
-      it("should filter with people", () => {
+      it("should query people", () => {
         return test
-          .get(`/people?q=Jane&fields=firstname,blah`)
+          .get(`/people?q=Jane&fields=firstname`)
           .expect(206)
           .then(res => {
             assert.equal(res.body.length, 1);
+          });
+      });
+
+      it("should query people by multiple fields", () => {
+        return test
+          .get(`/people?q=John Doe&fields=firstname,lastname,blah`)
+          .expect(206)
+          .then(res => {
+            assert.equal(res.body.length, 1);
+          });
+      });
+
+      it("should not query people by multiple fields form different rows", () => {
+        return test
+          .get(`/people?q=Jane Doe&fields=firstname,lastname,blah`)
+          .expect(206)
+          .then(res => {
+            assert.equal(res.body.length, 0);
           });
       });
     });
