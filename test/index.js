@@ -90,7 +90,7 @@ describe("rest", () => {
 
       it("should filter with people", () => {
         return test
-          .get(`/people?q=Jane&fields=firstname`)
+          .get(`/people?q=Jane&fields=firstname,blah`)
           .expect(206)
           .then(res => {
             assert.equal(res.body.length, 1);
