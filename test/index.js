@@ -77,6 +77,26 @@ describe("rest", () => {
         assert.equal(res.body.length, 3);
       });
     });
+
+    describe("filter", () => {
+      it("should get filtered people", () => {
+        return test
+          .get(`/people?where[firstname]=Jane`)
+          .expect(206)
+          .then(res => {
+            assert.equal(res.body.length, 1);
+          });
+      });
+
+      it("should filter with people", () => {
+        return test
+          .get(`/people?q=Jane&fields=firstname`)
+          .expect(206)
+          .then(res => {
+            assert.equal(res.body.length, 1);
+          });
+      });
+    });
   });
 
   describe("detail", () => {
