@@ -24,58 +24,85 @@ describe("rest", () => {
 
   describe("collections", () => {
     it("should get companies", () => {
-      return test.get(`/companies`).expect(206).then(res => {
-        assert.equal(res.headers["content-range"], "items 0-2/3");
-        assert.equal(res.body.length, 3);
-      });
+      return test
+        .get(`/companies`)
+        .expect(206)
+        .then(res => {
+          assert.equal(res.headers["content-range"], "items 0-2/3");
+          assert.equal(res.body.length, 3);
+        });
     });
     it("should get companies limit", () => {
-      return test.get(`/companies?limit=2`).expect(206).then(res => {
-        assert.equal(res.headers["content-range"], "items 0-1/3");
-        assert.equal(res.body.length, 2);
-      });
+      return test
+        .get(`/companies?limit=2`)
+        .expect(206)
+        .then(res => {
+          assert.equal(res.headers["content-range"], "items 0-1/3");
+          assert.equal(res.body.length, 2);
+        });
     });
     it("should get companies limit and offset", () => {
-      return test.get(`/companies?offset=1&limit=2`).expect(206).then(res => {
-        assert.equal(res.headers["content-range"], "items 1-2/3");
-        assert.equal(res.body.length, 2);
-      });
+      return test
+        .get(`/companies?offset=1&limit=2`)
+        .expect(206)
+        .then(res => {
+          assert.equal(res.headers["content-range"], "items 1-2/3");
+          assert.equal(res.body.length, 2);
+        });
     });
     it("should get companies limit and page", () => {
-      return test.get(`/companies?page=2&limit=1`).expect(206).then(res => {
-        assert.equal(res.headers["content-range"], "items 1-1/3");
-        assert.equal(res.body.length, 1);
-      });
+      return test
+        .get(`/companies?page=2&limit=1`)
+        .expect(206)
+        .then(res => {
+          assert.equal(res.headers["content-range"], "items 1-1/3");
+          assert.equal(res.body.length, 1);
+        });
     });
     it("should get companies sorted by id", () => {
-      return test.get(`/companies?order=id`).expect(206).then(res => {
-        assert.equal(res.body[0].id, 1);
-        assert.equal(res.body[1].id, 2);
-        assert.equal(res.body[2].id, 3);
-      });
+      return test
+        .get(`/companies?order=id`)
+        .expect(206)
+        .then(res => {
+          assert.equal(res.body[0].id, 1);
+          assert.equal(res.body[1].id, 2);
+          assert.equal(res.body[2].id, 3);
+        });
     });
     it("should get companies sorted by id DESC", () => {
-      return test.get(`/companies?order=-id`).expect(206).then(res => {
-        assert.equal(res.body[0].id, 3);
-        assert.equal(res.body[1].id, 2);
-        assert.equal(res.body[2].id, 1);
-      });
+      return test
+        .get(`/companies?order=-id`)
+        .expect(206)
+        .then(res => {
+          assert.equal(res.body[0].id, 3);
+          assert.equal(res.body[1].id, 2);
+          assert.equal(res.body[2].id, 1);
+        });
     });
     it("should get companies sorted by name", () => {
-      return test.get(`/companies?order=name`).expect(206).then(res => {
-        assert.equal(res.body[0].name, "test");
-        assert.equal(res.body[1].name, "test2");
-      });
+      return test
+        .get(`/companies?order=name`)
+        .expect(206)
+        .then(res => {
+          assert.equal(res.body[0].name, "test");
+          assert.equal(res.body[1].name, "test2");
+        });
     });
     it("should get companies", () => {
-      return test.get(`/companies`).expect(206).then(res => {
-        assert.equal(res.body.length, 3);
-      });
+      return test
+        .get(`/companies`)
+        .expect(206)
+        .then(res => {
+          assert.equal(res.body.length, 3);
+        });
     });
     it("should get people", () => {
-      return test.get(`/people`).expect(206).then(res => {
-        assert.equal(res.body.length, 3);
-      });
+      return test
+        .get(`/people`)
+        .expect(206)
+        .then(res => {
+          assert.equal(res.body.length, 3);
+        });
     });
 
     describe("filter", () => {
@@ -119,17 +146,23 @@ describe("rest", () => {
 
   describe("detail", () => {
     it("should get company detail", () => {
-      return test.get(`/companies/1`).expect(200).then(res => {
-        assert.ok(res.body.name);
-        assert.deepEqual(res.body.employees_id, [3]);
-      });
+      return test
+        .get(`/companies/1`)
+        .expect(200)
+        .then(res => {
+          assert.ok(res.body.name);
+          assert.deepEqual(res.body.employees_id, [3]);
+        });
     });
 
     it("should get preson detail", () => {
-      return test.get(`/people/1`).expect(200).then(res => {
-        assert.ok(res.body.firstname);
-        assert.deepEqual(res.body.company_id, 3);
-      });
+      return test
+        .get(`/people/1`)
+        .expect(200)
+        .then(res => {
+          assert.ok(res.body.firstname);
+          assert.deepEqual(res.body.company_id, 3);
+        });
     });
   });
 
@@ -196,14 +229,20 @@ describe("rest", () => {
 
   describe("delete", () => {
     it("should delete company", () => {
-      return test.delete(`/companies/1`).expect(204).then(() => {
-        return test.get("/companies/1").expect(404);
-      });
+      return test
+        .delete(`/companies/1`)
+        .expect(204)
+        .then(() => {
+          return test.get("/companies/1").expect(404);
+        });
     });
     it("should delete person", () => {
-      return test.delete(`/people/1`).expect(204).then(() => {
-        return test.get("/people/1").expect(404);
-      });
+      return test
+        .delete(`/people/1`)
+        .expect(204)
+        .then(() => {
+          return test.get("/people/1").expect(404);
+        });
     });
   });
 });
