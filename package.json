@@ -3,13 +3,7 @@
   "description": "Rest endpoint generator for js-core-data",
   "version": "0.1.0",
   "license": "MIT",
-  "keywords": [
-    "js-core-data",
-    "ORM",
-    "CoreData",
-    "rest",
-    "api"
-  ],
+  "keywords": ["js-core-data", "ORM", "CoreData", "rest", "api"],
   "dependencies": {
     "bluebird": "^3.5.1",
     "express-response-range": "^0.2.7",
@@ -25,6 +19,8 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
+    "patch-release":
+      "npm version patch && npm publish && git push --follow-tags",
     "test": "mocha test",
     "example": "node example/index.js"
   },
