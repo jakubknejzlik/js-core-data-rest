@@ -245,4 +245,23 @@ describe("rest", () => {
         });
     });
   });
+
+  describe("counts", () => {
+    it("should return correct count for whole collection", () => {
+      return test
+        .get(`/companies`)
+        .expect(206)
+        .expect(res => {
+          assert.equal(res.headers["content-range"], "items 0-2/3");
+        });
+    });
+    it("should return correct count for filtered collection", () => {
+      return test
+        .get(`/companies?where[id]=1`)
+        .expect(206)
+        .expect(res => {
+          assert.equal(res.headers["content-range"], "items 0-0/1");
+        });
+    });
+  });
 });
