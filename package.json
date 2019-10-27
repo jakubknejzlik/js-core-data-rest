@@ -13,7 +13,7 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "express": "^4.16.2",
-    "express-response-range": "^0.2.8",
+    "express-response-range": "^0.2.9",
     "inflection": "^1.12.0"
   },
   "devDependencies": {
